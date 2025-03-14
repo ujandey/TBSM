@@ -25,15 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Playlist with local files and album art
     const playlist = [
-        { title: "Nanchaku", artist: "Seedhe Maut", album: "Bayaan", url: "audio/nanchaku.mp3", art: "images/nanchaku-art.png" },
-        { title: "Hola Amigo", artist: "Seedhe Maut ft. kr$na & Umair", album: "Single", url: "audio/hola-amigo.mp3", art: "images/hola-amigo-art.png" },
+        { title: "Nanchaku", artist: "Seedhe Maut ft. MC Stan", album: "N", url: "audio/nanchaku.mp3", art: "images/nanchaku-art.png" },
+        { title: "Hola Amigo", artist: "Kr$na ft. Seedhe Maut & Umair", album: "Single", url: "audio/hola-amigo.mp3", art: "images/hola-amigo-art.png" },
         { title: "Kodak", artist: "King ft. Seedhe Maut", album: "Monopoly Moves", url: "audio/kodak.mp3", art: "images/kodak-art.png" },
         { title: "Maina", artist: "Seedhe Maut", album: "Nayaab", url: "audio/maina.mp3", art: "images/maina-art.png" },
-        { title: "Tour Shit", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/tour_shit.mp3", art: "images/tour_shit-art.png" },
-        { title: "TT", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/tt.mp3", art: "images/tt-art.png" },
-        { title: "Shutdown", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/shutdown.mp3", art: "images/shutdown-art.png" },
-        { title: "Kaanch Ke Ghar", artist: "Seedhe Maut", album: "Nayaab", url: "audio/kaanch_ke_ghar.mp3", art: "images/kaanch_ke_ghar-art.png" },
-        { title: "Bure Din", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/bure_din.mp3", art: "images/bure_din-art.png" },
+        { title: "Tour Shit", artist: "Seedhe Maut", album: "Single", url: "audio/tour_shit.mp3", art: "images/tour_shit-art.png" },
+        { title: "TT", artist: "Seedhe Maut", album: "Single", url: "audio/tt.mp3", art: "images/tt-art.png" },
+        { title: "Shutdown", artist: "Seedhe Maut", album: "Single", url: "audio/shutdown.mp3", art: "images/shutdown-art.png" },
+        { title: "Kaanch Ke Ghar", artist: "Seedhe Maut", album: "Single", url: "audio/kaanch_ke_ghar.mp3", art: "images/kaanch_ke_ghar-art.png" },
+        { title: "Bure Din", artist: "Seedhe Maut ft. Mick Jenkins", album: "Single", url: "audio/bure_din.mp3", art: "images/bure_din-art.png" },
         { title: "Nalla Freestyle", artist: "Seedhe Maut & DJ SA", album: "Single", url: "audio/nfs.mp3", art: "images/nfs-art.png" }
     ];
 
