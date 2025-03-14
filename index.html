@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TBSM4L</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="intro-container">
+        <img src="images/seedhe-maut-logo.png" alt="Seedhe Maut Logo" class="logo" id="logo">
+        <button class="start-btn" id="startBtn">
+            <span>START</span>
+        </button>
+    </div>
+
+    <div class="player-container" id="playerContainer">
+        <div class="player-header">
+            <img src="images/seedhe-maut-logo.png" alt="Seedhe Maut Logo" class="logo">
+        </div>
+        <div class="music-card">
+            <div class="album-art" id="albumArtContainer">
+                <img src="images/nanchaku-art.png" alt="Album Art" id="albumArt">
+            </div>
+            <div class="track-info">
+                <h2 id="trackTitle">Loading...</h2>
+                <p id="albumName">Album Name</p>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <div class="time-display">
+                    <span id="currentTime">0:00</span>
+                    <span id="totalTime">0:00</span>
+                </div>
+            </div>
+            <div class="control-buttons">
+                <button id="prevBtn" class="control-btn" aria-label="Previous Track"><i class="fas fa-step-backward"></i></button>
+                <button id="playPauseBtn" class="control-btn play-pause" aria-label="Play/Pause"><i class="fas fa-play"></i></button>
+                <button id="nextBtn" class="control-btn" aria-label="Next Track"><i class="fas fa-step-forward"></i></button>
+            </div>
+            <div class="volume-container">
+                <i class="fas fa-volume-up" id="volumeIcon"></i>
+                <input type="range" id="volumeSlider" min="0" max="100" value="70" aria-label="Volume">
+            </div>
+            <div class="playlist-container">
+                <h3>Playlist</h3>
+                <ul id="playlist" class="playlist"></ul>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audioPlayer" preload="metadata"></audio>
+    <script src="script.js"></script>
+</body>
+</html>

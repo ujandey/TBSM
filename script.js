@@ -1,0 +1,147 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // Elements
+    const startBtn = document.getElementById('startBtn');
+    const introContainer = document.querySelector('.intro-container');
+    const playerContainer = document.getElementById('playerContainer');
+    const logo = document.getElementById('logo');
+    const audioPlayer = document.getElementById('audioPlayer');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumeIcon = document.getElementById('volumeIcon');
+    const progressBar = document.getElementById('progressBar');
+    const progress = document.getElementById('progress');
+    const currentTimeEl = document.getElementById('currentTime');
+    const totalTimeEl = document.getElementById('totalTime');
+    const trackTitle = document.getElementById('trackTitle');
+    const albumName = document.getElementById('albumName');
+    const albumArt = document.getElementById('albumArt');
+    const playlistEl = document.getElementById('playlist');
+
+    // State
+    let isPlaying = false;
+    let currentTrackIndex = 0;
+
+    // Playlist with local files and album art
+    const playlist = [
+        { title: "Nanchaku", artist: "Seedhe Maut", album: "Bayaan", url: "audio/nanchaku.mp3", art: "images/nanchaku-art.png" },
+        { title: "Hola Amigo", artist: "Seedhe Maut ft. kr$na & Umair", album: "Single", url: "audio/hola-amigo.mp3", art: "images/hola-amigo-art.png" },
+        { title: "Kodak", artist: "King ft. Seedhe Maut", album: "Monopoly Moves", url: "audio/kodak.mp3", art: "images/kodak-art.png" },
+        { title: "Maina", artist: "Seedhe Maut", album: "Nayaab", url: "audio/maina.mp3", art: "images/maina-art.png" }
+    ];
+
+    // Intro animation and player reveal
+    startBtn.addEventListener('click', () => {
+        logo.classList.add('moved');
+        introContainer.classList.add('hidden');
+        playerContainer.classList.add('active');
+        loadAndPlay(0);
+    });
+
+    // Render playlist
+    function renderPlaylist() {
+        playlistEl.innerHTML = '';
+        playlist.forEach((track, index) => {
+            const li = document.createElement('li');
+            li.className = index === currentTrackIndex ? 'active' : '';
+            li.innerHTML = `
+                <div class="song-info">
+                    <span class="song-title">${track.title}</span>
+                    <span class="song-artist">${track.artist}</span>
+                </div>
+                <span class="song-duration">--:--</span>
+            `;
+            li.addEventListener('click', () => loadAndPlay(index));
+            playlistEl.appendChild(li);
+        });
+    }
+
+    // Load track
+    function loadTrack(index) {
+        currentTrackIndex = (index < 0) ? playlist.length - 1 : (index >= playlist.length) ? 0 : index;
+        const track = playlist[currentTrackIndex];
+
+        audioPlayer.src = track.url;
+        trackTitle.textContent = 'Loading...';
+        albumName.textContent = `${track.artist} - ${track.album}`;
+        albumArt.src = track.art;
+
+        document.querySelectorAll('.playlist li').forEach((item, i) => {
+            item.className = i === currentTrackIndex ? 'active' : '';
+        });
+
+        progress.style.width = '0%';
+        currentTimeEl.textContent = '0:00';
+    }
+
+    // Play track
+    function playTrack() {
+        audioPlayer.play().then(() => {
+            isPlaying = true;
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            document.querySelector('.music-card').classList.add('is-playing');
+        }).catch(err => console.error('Play error:', err));
+    }
+
+    // Pause track
+    function pauseTrack() {
+        audioPlayer.pause();
+        isPlaying = false;
+        playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+        document.querySelector('.music-card').classList.remove('is-playing');
+    }
+
+    // Load and play
+    function loadAndPlay(index) {
+        loadTrack(index);
+        playTrack();
+    }
+
+    // Format time
+    function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+
+    // Event Listeners
+    playPauseBtn.addEventListener('click', () => isPlaying ? pauseTrack() : playTrack());
+    prevBtn.addEventListener('click', () => loadAndPlay(currentTrackIndex - 1));
+    nextBtn.addEventListener('click', () => loadAndPlay(currentTrackIndex + 1));
+
+    volumeSlider.addEventListener('input', () => {
+        const volume = volumeSlider.value / 100;
+        audioPlayer.volume = volume;
+        volumeIcon.className = `fas ${volume > 0.5 ? 'fa-volume-up' : volume > 0 ? 'fa-volume-down' : 'fa-volume-mute'}`;
+    });
+
+    progressBar.addEventListener('click', (e) => {
+        const width = progressBar.clientWidth;
+        const clickX = e.offsetX;
+        audioPlayer.currentTime = (clickX / width) * audioPlayer.duration;
+    });
+
+    audioPlayer.addEventListener('timeupdate', () => {
+        const { currentTime, duration } = audioPlayer;
+        if (!isNaN(duration)) {
+            progress.style.width = `${(currentTime / duration) * 100}%`;
+            currentTimeEl.textContent = formatTime(currentTime);
+            totalTimeEl.textContent = formatTime(duration);
+        }
+    });
+
+    audioPlayer.addEventListener('loadedmetadata', () => {
+        trackTitle.textContent = playlist[currentTrackIndex].title;
+        totalTimeEl.textContent = formatTime(audioPlayer.duration);
+    });
+
+    audioPlayer.addEventListener('ended', () => loadAndPlay(currentTrackIndex + 1));
+    audioPlayer.addEventListener('error', () => {
+        console.error('Audio error:', audioPlayer.error.message);
+        trackTitle.textContent = 'Error loading track';
+    });
+
+    // Initialize
+    renderPlaylist();
+});
