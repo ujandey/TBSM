@@ -35,8 +35,21 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: "Kaanch Ke Ghar", artist: "Seedhe Maut", album: "Single", url: "audio/kaanch_ke_ghar.mp3", art: "images/kaanch_ke_ghar-art.png" },
         { title: "Bure Din", artist: "Seedhe Maut ft. Mick Jenkins", album: "Single", url: "audio/bure_din.mp3", art: "images/bure_din-art.png" },
         { title: "Nalla Freestyle", artist: "Seedhe Maut & DJ SA", album: "Single", url: "audio/nfs.mp3", art: "images/nfs-art.png" },
-        { title: "Bajenge", artist: "Seedhe Maut ft. Baadshah", album: "Single", url: "audio/bajenge.mp3", art: "images/bajenge-art.png" }
-    ];
+        { title: "Bajenge", artist: "Seedhe Maut ft. Baadshah", album: "Single", url: "audio/bajenge.mp3", art: "images/bajenge-art.png" },
+        { title: "Akatsuki", artist: "Seedhe Maut ft. Raga", album: "Lunch Break", url: "audio/akatsuki.mp3", art: "images/lunch-break.png" },
+        { title: "Asal G", artist: "Seedhe Maut ft. Faris Shafi & Talal Qureshi ", album: "Lunch Break", url: "audio/asal-g.mp3", art: "images/lunch-break.png" },
+        { title: "Focus Sedated", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/focus-sedated.mp3", art: "images/lunch-break.png" },
+        { title: "I don't miss that life", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/idmtl.mp3", art: "images/lunch-break.png" },
+        { title: "Joint in the booth", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/jitb.mp3", art: "images/lunch-break.png" },
+        { title: "Khatta flow", artist: "Seedhe Maut ft. KR$NA", album: "Lunch Break", url: "audio/khatta-flow.mp3", art: "images/lunch-break.png" },
+        { title: "Kavi", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/kavi.mp3", art: "images/lunch-break.png" },
+        { title: "Kavi kehna chahte hain...", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/kkch.mp3", art: "images/lunch-break.png" },
+        { title: "Lunch break", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/lunchbreak.mp3", art: "images/lunch-break.png" },
+        { title: "Naam Kaam Seher", artist: "Seedhe Maut ft.Faris shafi & Talal qureshi", album: "Lunch Break", url: "audio/namkamseher.mp3", art: "images/lunch-break.png" },
+        { title: "Pain", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/pain.mp3", art: "images/lunch-break.png" },
+        { title: "Swah!", artist: "Seedhe Maut ft.Baadshah", album: "Lunch Break", url: "audio/swah.mp3", art: "images/lunch-break.png" },
+        { title: "W", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/w.mp3", art: "images/lunch-break.png" },
+ ];
 
     // Intro animation and player reveal
     startBtn.addEventListener('click', () => {
