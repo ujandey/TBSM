@@ -34,7 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: "Shutdown", artist: "Seedhe Maut", album: "Single", url: "audio/shutdown.mp3", art: "images/shutdown-art.png" },
         { title: "Kaanch Ke Ghar", artist: "Seedhe Maut", album: "Single", url: "audio/kaanch_ke_ghar.mp3", art: "images/kaanch_ke_ghar-art.png" },
         { title: "Bure Din", artist: "Seedhe Maut ft. Mick Jenkins", album: "Single", url: "audio/bure_din.mp3", art: "images/bure_din-art.png" },
-        { title: "Nalla Freestyle", artist: "Seedhe Maut & DJ SA", album: "Single", url: "audio/nfs.mp3", art: "images/nfs-art.png" }
+        { title: "Nalla Freestyle", artist: "Seedhe Maut & DJ SA", album: "Single", url: "audio/nfs.mp3", art: "images/nfs-art.png" },
+        { title: "Bajenge", artist: "Seedhe Maut ft. Baadshah", album: "Single", url: "audio/bajenge.mp3", art: "images/bajenge-art.png" }
     ];
 
     // Intro animation and player reveal
