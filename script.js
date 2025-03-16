@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Playlist
     const playlist = [
-        { title: "Nanchaku", artist: "Seedhe Maut ft. MC Stan", album: "N", url: "audio/nanchaku.mp3", art: "images/nanchaku-art.png" },
+        { title: "Nanchaku", artist: "Seedhe Maut ft. MC Stan", album: "N", url: "audio/nanchaku.mp3", art: "images/n.png" },
         { title: "Hola Amigo", artist: "Kr$na ft. Seedhe Maut & Umair", album: "Single", url: "audio/hola-amigo.mp3", art: "images/hola-amigo-art.png" },
         { title: "Kodak", artist: "King ft. Seedhe Maut", album: "Monopoly Moves", url: "audio/kodak.mp3", art: "images/kodak-art.png" },
         { title: "Maina", artist: "Seedhe Maut", album: "Nayaab", url: "audio/maina.mp3", art: "images/maina-art.png" },
@@ -67,6 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: "Gandi Aulaad", artist: "Seedhe Maut & Sez on the beat", album: "Nayaab", url: "audio/ga.mp3", art: "images/nayaab.png" },
         { title: "Roshni", artist: "Sickflip, Ritviz, Seedhe maut", album: "Nayaab", url: "audio/roshni.mp3", art: "images/roshni.png" },
         { title: "Shayaar", artist: "Bharat chauhan & Seedhe maut", album: "Single", url: "audio/shaayar.mp3", art: "images/shayaar.png" },
+        { title: "Namastute", artist: "Seedhe Maut", album: "N", url: "audio/namastute.mp3", art: "images/n.png" },
+
     ];
 
     // Intro animation and player reveal
