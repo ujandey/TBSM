@@ -101,12 +101,10 @@ body {
     background-color: #FF0000;
 }
 
-.player-container {
+.player-wrapper {
+    display: flex;
     width: 90%;
-    max-width: 450px;
-    background: rgba(20, 20, 20, 0.95);
-    border-radius: 20px;
-    padding: 20px;
+    max-width: 700px;
     margin: 0 auto;
     position: relative;
     top: -70vh;
@@ -115,9 +113,55 @@ body {
     transition: opacity 0.5s ease;
 }
 
-.player-container.active {
+.player-wrapper.active {
     opacity: 1;
     visibility: visible;
+}
+
+.album-sidebar {
+    width: 200px;
+    background: rgba(20, 20, 20, 0.95);
+    border-radius: 20px 0 0 20px;
+    padding: 20px;
+    height: fit-content;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.album-sidebar h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: #FF0000;
+    margin-bottom: 15px;
+}
+
+.album-list {
+    list-style: none;
+}
+
+.album-list li {
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.album-list li:hover {
+    background: rgba(139, 0, 0, 0.2);
+}
+
+.album-list li.active {
+    background: rgba(139, 0, 0, 0.4);
+    border-left: 4px solid #FF0000;
+}
+
+.player-container {
+    flex: 1;
+    background: rgba(20, 20, 20, 0.95);
+    border-radius: 0 20px 20px 0;
+    padding: 20px;
 }
 
 .player-header {
@@ -265,6 +309,8 @@ body {
 
 .playlist {
     list-style: none;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .playlist li {
@@ -406,7 +452,7 @@ body {
 }
 
 .social-card .box3::before {
-    background: radial-gradient(circle at 30% 107%, #969fff 0%, #b349ff 90%);
+    background: radial-gradient(circle at 30% 107%, #ffffff 0%, #000000 90%); /* GitHub theme */
 }
 
 .social-card .box3:hover::before {
@@ -453,7 +499,9 @@ body {
     .logo.moved { transform: translateY(-10vh); }
     .start-btn { width: 150px; height: 60px; }
     .start-btn span { font-size: 12px; }
-    .player-container { width: 95%; padding: 15px; }
+    .player-wrapper { width: 95%; flex-direction: column; }
+    .album-sidebar { width: 100%; border-radius: 20px 20px 0 0; max-height: 200px; }
+    .player-container { border-radius: 0 0 20px 20px; padding: 15px; }
     .album-art { width: 200px; height: 200px; }
     .track-info h2 { font-size: 20px; }
     .control-btn { width: 40px; height: 40px; }

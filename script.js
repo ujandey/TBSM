@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Elements
     const startBtn = document.getElementById('startBtn');
     const introContainer = document.querySelector('.intro-container');
-    const playerContainer = document.getElementById('playerContainer');
+    const playerWrapper = document.getElementById('playerWrapper');
     const logo = document.getElementById('logo');
     const audioPlayer = document.getElementById('audioPlayer');
     const playPauseBtn = document.getElementById('playPauseBtn');
@@ -18,12 +18,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const albumName = document.getElementById('albumName');
     const albumArt = document.getElementById('albumArt');
     const playlistEl = document.getElementById('playlist');
+    const albumListEl = document.getElementById('albumList');
+    const currentAlbumTitle = document.getElementById('currentAlbumTitle');
+    const listenerCountEl = document.getElementById('listenerCount');
+    const socialListenerCountEl = document.getElementById('socialListenerCount');
 
     // State
     let isPlaying = false;
     let currentTrackIndex = 0;
+    let currentAlbum = 'All'; // Default to show all songs
+    let filteredPlaylist = [];
 
-    // Playlist with local files and album art
+    // Playlist
     const playlist = [
         { title: "Nanchaku", artist: "Seedhe Maut ft. MC Stan", album: "N", url: "audio/nanchaku.mp3", art: "images/nanchaku-art.png" },
         { title: "Hola Amigo", artist: "Kr$na ft. Seedhe Maut & Umair", album: "Single", url: "audio/hola-amigo.mp3", art: "images/hola-amigo-art.png" },
@@ -37,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: "Nalla Freestyle", artist: "Seedhe Maut & DJ SA", album: "Single", url: "audio/nfs.mp3", art: "images/nfs-art.png" },
         { title: "Bajenge", artist: "Seedhe Maut ft. Baadshah", album: "Single", url: "audio/bajenge.mp3", art: "images/bajenge-art.png" },
         { title: "Akatsuki", artist: "Seedhe Maut ft. Raga", album: "Lunch Break", url: "audio/akatsuki.mp3", art: "images/lunch-break.png" },
-        { title: "Asal G", artist: "Seedhe Maut ft. Faris Shafi & Talal Qureshi ", album: "Lunch Break", url: "audio/asal-g.mp3", art: "images/lunch-break.png" },
+        { title: "Asal G", artist: "Seedhe Maut ft. Faris Shafi & Talal Qureshi", album: "Lunch Break", url: "audio/asal-g.mp3", art: "images/lunch-break.png" },
         { title: "Focus Sedated", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/focus-sedated.mp3", art: "images/lunch-break.png" },
         { title: "I don't miss that life", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/idmtl.mp3", art: "images/lunch-break.png" },
         { title: "Joint in the booth", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/jitb.mp3", art: "images/lunch-break.png" },
@@ -58,32 +64,48 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: "Chidiya udd", artist: "Seedhe Maut & Sez on the beat", album: "Nayaab", url: "audio/chidiya.mp3", art: "images/nayaab.png" },
         { title: "Do guna", artist: "Seedhe Maut", album: "Single", url: "audio/doguna.mp3", art: "images/doguna.png" },
         { title: "11k", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/11k.mp3", art: "images/lunch-break.png" },
-
         { title: "Gandi Aulaad", artist: "Seedhe Maut & Sez on the beat", album: "Nayaab", url: "audio/ga.mp3", art: "images/nayaab.png" },
         { title: "Roshni", artist: "Sickflip, Ritviz, Seedhe maut", album: "Nayaab", url: "audio/roshni.mp3", art: "images/roshni.png" },
         { title: "Shayaar", artist: "Bharat chauhan & Seedhe maut", album: "Single", url: "audio/shaayar.mp3", art: "images/shayaar.png" },
-
-
-
-
-
-
- ];
+    ];
 
     // Intro animation and player reveal
     startBtn.addEventListener('click', () => {
         logo.classList.add('moved');
         introContainer.classList.add('hidden');
-        playerContainer.classList.add('active');
+        playerWrapper.classList.add('active');
         loadAndPlay(0);
     });
 
-    // Render playlist
-    function renderPlaylist() {
-        playlistEl.innerHTML = '';
-        playlist.forEach((track, index) => {
+    // Get unique albums
+    const albums = ['All', ...new Set(playlist.map(track => track.album))];
+
+    // Render album list
+    function renderAlbumList() {
+        albumListEl.innerHTML = '';
+        albums.forEach(album => {
             const li = document.createElement('li');
-            li.className = index === currentTrackIndex ? 'active' : '';
+            li.textContent = album;
+            li.className = album === currentAlbum ? 'active' : '';
+            li.addEventListener('click', () => {
+                currentAlbum = album;
+                filterAndRenderPlaylist();
+                document.querySelectorAll('.album-list li').forEach(item => {
+                    item.className = item.textContent === currentAlbum ? 'active' : '';
+                });
+            });
+            albumListEl.appendChild(li);
+        });
+    }
+
+    // Filter and render playlist
+    function filterAndRenderPlaylist() {
+        filteredPlaylist = currentAlbum === 'All' ? playlist : playlist.filter(track => track.album === currentAlbum);
+        currentAlbumTitle.textContent = currentAlbum === 'All' ? 'All Tracks' : currentAlbum;
+        playlistEl.innerHTML = '';
+        filteredPlaylist.forEach((track, index) => {
+            const li = document.createElement('li');
+            li.className = index === currentTrackIndex && track.album === playlist[currentTrackIndex].album ? 'active' : '';
             li.innerHTML = `
                 <div class="song-info">
                     <span class="song-title">${track.title}</span>
@@ -98,18 +120,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load track
     function loadTrack(index) {
-        currentTrackIndex = (index < 0) ? playlist.length - 1 : (index >= playlist.length) ? 0 : index;
-        const track = playlist[currentTrackIndex];
-
+        currentTrackIndex = (index < 0) ? filteredPlaylist.length - 1 : (index >= filteredPlaylist.length) ? 0 : index;
+        const track = filteredPlaylist[currentTrackIndex];
         audioPlayer.src = track.url;
         trackTitle.textContent = 'Loading...';
         albumName.textContent = `${track.artist} - ${track.album}`;
         albumArt.src = track.art;
-
         document.querySelectorAll('.playlist li').forEach((item, i) => {
             item.className = i === currentTrackIndex ? 'active' : '';
         });
-
         progress.style.width = '0%';
         currentTimeEl.textContent = '0:00';
     }
@@ -144,6 +163,16 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     }
 
+    // Simulate listener count
+    let fakeListeners = 42;
+    function updateListenerCount() {
+        fakeListeners += Math.floor(Math.random() * 3) - 1;
+        fakeListeners = Math.max(10, Math.min(100, fakeListeners));
+        listenerCountEl.textContent = fakeListeners;
+        socialListenerCountEl.textContent = fakeListeners;
+    }
+    setInterval(updateListenerCount, 5000);
+
     // Event Listeners
     playPauseBtn.addEventListener('click', () => isPlaying ? pauseTrack() : playTrack());
     prevBtn.addEventListener('click', () => loadAndPlay(currentTrackIndex - 1));
@@ -171,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     audioPlayer.addEventListener('loadedmetadata', () => {
-        trackTitle.textContent = playlist[currentTrackIndex].title;
+        trackTitle.textContent = filteredPlaylist[currentTrackIndex].title;
         totalTimeEl.textContent = formatTime(audioPlayer.duration);
     });
 
@@ -182,5 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Initialize
-    renderPlaylist();
+    renderAlbumList();
+    filterAndRenderPlaylist();
 });

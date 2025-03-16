@@ -16,76 +16,82 @@
         </button>
     </div>
 
-    <div class="player-container" id="playerContainer">
-        <div class="player-header">
-            <img src="images/seedhe-maut-logo.png" alt="Seedhe Maut Logo" class="logo">
+    <div class="player-wrapper" id="playerWrapper">
+        <div class="album-sidebar" id="albumSidebar">
+            <h3>Albums</h3>
+            <ul id="albumList" class="album-list"></ul>
         </div>
-        <div class="music-card">
-            <div class="album-art" id="albumArtContainer">
-                <img src="images/nanchaku-art.png" alt="Album Art" id="albumArt">
+        <div class="player-container" id="playerContainer">
+            <div class="player-header">
+                <img src="images/seedhe-maut-logo.png" alt="Seedhe Maut Logo" class="logo">
             </div>
-            <div class="track-info">
-                <h2 id="trackTitle">Loading...</h2>
-                <p id="albumName">Album Name</p>
-            </div>
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar">
-                    <div class="progress" id="progress"></div>
+            <div class="music-card">
+                <div class="album-art" id="albumArtContainer">
+                    <img src="images/nanchaku-art.png" alt="Album Art" id="albumArt">
                 </div>
-                <div class="time-display">
-                    <span id="currentTime">0:00</span>
-                    <span id="totalTime">0:00</span>
+                <div class="track-info">
+                    <h2 id="trackTitle">Loading...</h2>
+                    <p id="albumName">Album Name</p>
                 </div>
-            </div>
-            <div class="listener-count">
-                <span id="listenerCount">42</span> Listeners Right Now
-            </div>
-            <div class="control-buttons">
-                <button id="prevBtn" class="control-btn" aria-label="Previous Track"><i class="fas fa-step-backward"></i></button>
-                <button id="playPauseBtn" class="control-btn play-pause" aria-label="Play/Pause"><i class="fas fa-play"></i></button>
-                <button id="nextBtn" class="control-btn" aria-label="Next Track"><i class="fas fa-step-forward"></i></button>
-            </div>
-            <div class="volume-container">
-                <i class="fas fa-volume-up" id="volumeIcon"></i>
-                <input type="range" id="volumeSlider" min="0" max="100" value="70" aria-label="Volume">
-            </div>
-            <div class="playlist-container">
-                <h3>Playlist</h3>
-                <ul id="playlist" class="playlist"></ul>
-            </div>
-            <!-- Social Card -->
-            <div class="social-card">
-                <div class="background"></div>
-                <div class="social-logo">Socials</div>
-                <a href="https://instagram.com/ujan_waitforit_dey" target="_blank">
-                    <div class="box box1">
-                        <span class="icon">
-                            <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" class="svg">
-                                <path d="M 9.9980469 3 C 6.1390469 3 3 6.1419531 3 10.001953 L 3 20.001953 C 3 23.860953 6.1419531 27 10.001953 27 L 20.001953 27 C 23.860953 27 27 23.858047 27 19.998047 L 27 9.9980469 C 27 6.1390469 23.858047 3 19.998047 3 L 9.9980469 3 z M 22 7 C 22.552 7 23 7.448 23 8 C 23 8.552 22.552 9 22 9 C 21.448 9 21 8.552 21 8 C 21 7.448 21.448 7 22 7 z M 15 9 C 18.309 9 21 11.691 21 15 C 21 18.309 18.309 21 15 21 C 11.691 21 9 18.309 9 15 C 9 11.691 11.691 9 15 9 z M 15 11 A 4 4 0 0 0 11 15 A 4 4 0 0 0 15 19 A 4 4 0 0 0 19 15 A 4 4 0 0 0 15 11 z" />
-                            </svg>
-                        </span>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress" id="progress"></div>
                     </div>
-                </a>
-                <a href="https://twitter.com/_organesson_" target="_blank">
-                    <div class="box box2">
-                        <span class="icon">
-                            <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" class="svg">
-                                <path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z" />
-                            </svg>
-                        </span>
+                    <div class="time-display">
+                        <span id="currentTime">0:00</span>
+                        <span id="totalTime">0:00</span>
                     </div>
-                </a>
-                <a href="https://github.com/ujandey" target="_blank">
-                    <div class="box box3">
-                        <span class="icon">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="svg">
-                                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-.808-.407-1.943 1.006-1.943 1.006.218.68 1.417 1.006 1.417 1.006 1.27 2.175 3.716 1.55 4.62 1.185 0-.925.012-1.8.043-2.65-2.893-.633-5.153-2.88-5.153-5.42 0-1.236.996-2.24 2.24-2.24s2.24 1.004 2.24 2.24c0 1.54-2.26 3.787-5.153 5.42C6.687 21.09 8.947 22 12 22c6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/>
-                            </svg>
-                        </span>
+                </div>
+                <div class="listener-count">
+                    <span id="listenerCount">42</span> Listeners Right Now
+                </div>
+                <div class="control-buttons">
+                    <button id="prevBtn" class="control-btn" aria-label="Previous Track"><i class="fas fa-step-backward"></i></button>
+                    <button id="playPauseBtn" class="control-btn play-pause" aria-label="Play/Pause"><i class="fas fa-play"></i></button>
+                    <button id="nextBtn" class="control-btn" aria-label="Next Track"><i class="fas fa-step-forward"></i></button>
+                </div>
+                <div class="volume-container">
+                    <i class="fas fa-volume-up" id="volumeIcon"></i>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="70" aria-label="Volume">
+                </div>
+                <div class="playlist-container">
+                    <h3 id="currentAlbumTitle">Playlist</h3>
+                    <ul id="playlist" class="playlist"></ul>
+                </div>
+                <!-- Social Card -->
+                <div class="social-card">
+                    <div class="background"></div>
+                    <div class="social-logo">Socials</div>
+                    <a href="https://instagram.com/ujan_waitforit_dey" target="_blank">
+                        <div class="box box1">
+                            <span class="icon">
+                                <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" class="svg">
+                                    <path d="M 9.9980469 3 C 6.1390469 3 3 6.1419531 3 10.001953 L 3 20.001953 C 3 23.860953 6.1419531 27 10.001953 27 L 20.001953 27 C 23.860953 27 27 23.858047 27 19.998047 L 27 9.9980469 C 27 6.1390469 23.858047 3 19.998047 3 L 9.9980469 3 z M 22 7 C 22.552 7 23 7.448 23 8 C 23 8.552 22.552 9 22 9 C 21.448 9 21 8.552 21 8 C 21 7.448 21.448 7 22 7 z M 15 9 C 18.309 9 21 11.691 21 15 C 21 18.309 18.309 21 15 21 C 11.691 21 9 18.309 9 15 C 9 11.691 11.691 9 15 9 z M 15 11 A 4 4 0 0 0 11 15 A 4 4 0 0 0 15 19 A 4 4 0 0 0 19 15 A 4 4 0 0 0 15 11 z" />
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+                    <a href="https://twitter.com/_organesson_" target="_blank">
+                        <div class="box box2">
+                            <span class="icon">
+                                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" class="svg">
+                                    <path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z" />
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/ujandey" target="_blank">
+                        <div class="box box3">
+                            <span class="icon">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="svg">
+                                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-.808-.407-1.943 1.006-1.943 1.006.218.68 1.417 1.006 1.417 1.006 1.27 2.175 3.716 1.55 4.62 1.185 0-.925.012-1.8.043-2.65-2.893-.633-5.153-2.88-5.153-5.42 0-1.236.996-2.24 2.24-2.24s2.24 1.004 2.24 2.24c0 1.54-2.26 3.787-5.153 5.42C6.687 21.09 8.947 22 12 22c6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+                    <div class="social-listener-count">
+                        <span id="socialListenerCount">42</span> Listeners Right Now
                     </div>
-                </a>
-                <div class="social-listener-count">
-                    <span id="socialListenerCount">47</span> Listeners Right Now
                 </div>
             </div>
         </div>
@@ -93,5 +99,6 @@
 
     <audio id="audioPlayer" preload="metadata"></audio>
     <script src="script.js"></script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'921432b9ce5a135d',t:'MTc0MjEyNzU1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
