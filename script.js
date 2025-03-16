@@ -45,10 +45,17 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: "Kavi", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/kavi.mp3", art: "images/lunch-break.png" },
         { title: "Kavi kehna chahte hain...", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/kkch.mp3", art: "images/lunch-break.png" },
         { title: "Lunch break", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/lunchbreak.mp3", art: "images/lunch-break.png" },
-        { title: "Naam Kaam Seher", artist: "Seedhe Maut ft.Faris shafi & Talal qureshi", album: "Lunch Break", url: "audio/namkamseher.mp3", art: "images/lunch-break.png" },
+        { title: "Naam Kaam Seher", artist: "Seedhe Maut ft.Qaab & Rebel", album: "Lunch Break", url: "audio/namkamseher.mp3", art: "images/lunch-break.png" },
         { title: "Pain", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/pain.mp3", art: "images/lunch-break.png" },
         { title: "Swah!", artist: "Seedhe Maut ft.Baadshah", album: "Lunch Break", url: "audio/swah.mp3", art: "images/lunch-break.png" },
         { title: "W", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/w.mp3", art: "images/lunch-break.png" },
+        { title: "Khush Nahi", artist: "Seedhe Maut", album: "Shakti", url: "audio/khushnahi.mp3", art: "images/shakti-art.webp" },
+        { title: "Soyi Nahi", artist: "Seedhe Maut", album: "Shakti", url: "audio/soyinahi.mp3", art: "images/shakti-art.webp" },
+        { title: "Naksha", artist: "Seedhe Maut", album: "Shakti", url: "audio/naksha.mp3", art: "images/shakti-art.webp" },
+        { title: "Raat ki rani", artist: "Seedhe Maut", album: "Shakti", url: "audio/rkr.mp3", art: "images/shakti-art.webp" },
+
+
+
  ];
 
     // Intro animation and player reveal
