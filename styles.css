@@ -16,7 +16,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 70vh; /* Reduced from 100vh to pull it up */
+    height: 70vh;
     transition: opacity 0.5s ease-out;
 }
 
@@ -35,7 +35,7 @@ body {
 }
 
 .logo.moved {
-    transform: translateY(-10vh); /* Less movement, keeps it in view */
+    transform: translateY(-10vh);
 }
 
 .start-btn {
@@ -107,9 +107,9 @@ body {
     background: rgba(20, 20, 20, 0.95);
     border-radius: 20px;
     padding: 20px;
-    margin: 0 auto; /* No top margin */
+    margin: 0 auto;
     position: relative;
-    top: -70vh; /* Pulls it up slightly */
+    top: -70vh;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s ease;
@@ -186,6 +186,14 @@ body {
     font-size: 12px;
     color: #888888;
     margin-top: 5px;
+}
+
+.listener-count {
+    font-size: 14px;
+    color: #FF0000;
+    text-align: center;
+    margin: 15px 0;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .control-buttons {
@@ -278,6 +286,168 @@ body {
     border-left: 4px solid #FF0000;
 }
 
+/* Social Card Styles */
+.social-card {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background: lightgrey;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    transition: all 1s ease-in-out;
+    border: 2px solid rgb(255, 255, 255);
+    margin: 20px auto 0;
+}
+
+.social-card .background {
+    position: absolute;
+    inset: 0;
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+}
+
+.social-card .social-logo {
+    position: absolute;
+    right: 50%;
+    bottom: 50%;
+    transform: translate(50%, 50%);
+    transition: all 0.6s ease-in-out;
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 3px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.social-card .icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+
+.social-card .svg {
+    fill: rgba(255, 255, 255, 0.797);
+    width: 100%;
+    transition: all 0.5s ease-in-out;
+}
+
+.social-card .box {
+    position: absolute;
+    padding: 10px;
+    text-align: right;
+    background: rgba(255, 255, 255, 0.389);
+    border-top: 2px solid rgb(255, 255, 255);
+    border-right: 1px solid white;
+    border-radius: 10% 13% 42% 0%/10% 12% 75% 0%;
+    box-shadow: rgba(100, 100, 111, 0.364) -7px 7px 29px 0px;
+    transform-origin: bottom left;
+    transition: all 1s ease-in-out;
+}
+
+.social-card .box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+.social-card .box:hover .svg {
+    fill: white;
+}
+
+.social-card .box1 {
+    width: 70%;
+    height: 70%;
+    bottom: -70%;
+    left: -70%;
+}
+
+.social-card .box1::before {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #ff53d4 60%, #62c2fe 90%);
+}
+
+.social-card .box1:hover::before {
+    opacity: 1;
+}
+
+.social-card .box1:hover .icon .svg {
+    filter: drop-shadow(0 0 5px white);
+}
+
+.social-card .box2 {
+    width: 50%;
+    height: 50%;
+    bottom: -50%;
+    left: -50%;
+    transition-delay: 0.2s;
+}
+
+.social-card .box2::before {
+    background: radial-gradient(circle at 30% 107%, #91e9ff 0%, #00ACEE 90%);
+}
+
+.social-card .box2:hover::before {
+    opacity: 1;
+}
+
+.social-card .box2:hover .icon .svg {
+    filter: drop-shadow(0 0 5px white);
+}
+
+.social-card .box3 {
+    width: 30%;
+    height: 30%;
+    bottom: -30%;
+    left: -30%;
+    transition-delay: 0.4s;
+}
+
+.social-card .box3::before {
+    background: radial-gradient(circle at 30% 107%, #969fff 0%, #b349ff 90%);
+}
+
+.social-card .box3:hover::before {
+    opacity: 1;
+}
+
+.social-card .box3:hover .icon .svg {
+    filter: drop-shadow(0 0 5px white);
+}
+
+.social-card:hover {
+    transform: scale(1.1);
+}
+
+.social-card:hover .box {
+    bottom: -1px;
+    left: -1px;
+}
+
+.social-card:hover .social-logo {
+    transform: translate(70px, -52px);
+    letter-spacing: 0px;
+}
+
+.social-card .social-listener-count {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    transition: all 0.5s ease-in-out;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.social-card:hover .social-listener-count {
+    color: #ffffff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
 @media (max-width: 480px) {
     .logo { width: 150px; height: 150px; }
     .logo.moved { transform: translateY(-10vh); }
@@ -288,4 +458,5 @@ body {
     .track-info h2 { font-size: 20px; }
     .control-btn { width: 40px; height: 40px; }
     .play-pause { width: 50px; height: 50px; }
+    .social-card { width: 180px; height: 180px; }
 }
