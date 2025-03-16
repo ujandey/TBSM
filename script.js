@@ -57,7 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: "Teen dost", artist: "Seedhe Maut & Sez on the beat", album: "Nayaab", url: "audio/3dost.mp3", art: "images/nayaab.png" },
         { title: "Chidiya udd", artist: "Seedhe Maut & Sez on the beat", album: "Nayaab", url: "audio/chidiya.mp3", art: "images/nayaab.png" },
         { title: "Do guna", artist: "Seedhe Maut", album: "Single", url: "audio/doguna.mp3", art: "images/doguna.png" },
-        
+        { title: "11k", artist: "Seedhe Maut", album: "Lunch Break", url: "audio/11k.mp3", art: "images/lunch-break.png" },
+
         { title: "Gandi Aulaad", artist: "Seedhe Maut & Sez on the beat", album: "Nayaab", url: "audio/ga.mp3", art: "images/nayaab.png" },
         { title: "Roshni", artist: "Sickflip, Ritviz, Seedhe maut", album: "Nayaab", url: "audio/roshni.mp3", art: "images/roshni.png" },
         { title: "Shayaar", artist: "Bharat chauhan & Seedhe maut", album: "Single", url: "audio/shaayar.mp3", art: "images/shayaar.png" },
