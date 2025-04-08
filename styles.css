@@ -453,7 +453,7 @@ body {
 }
 
 .social-card .box3::before {
-    background: radial-gradient(circle at 30% 107%, #ffffff 0%, #000000 90%);
+    background: radial-gradient(circle at 30% 107%, #ffffff 0%, #000000 90%); /* GitHub theme */
 }
 
 .social-card .box3:hover::before {
@@ -495,93 +495,6 @@ body {
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
 }
 
-.update-card {
-    width: 300px;
-    height: 320px;
-    background: #000000;
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    border-radius: 20px;
-    z-index: 1000;
-    box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
-}
-
-.update-card h2 {
-    z-index: 1;
-    color: #FF0000;
-    font-size: 1.8em;
-    font-family: 'Montserrat', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.update-card p {
-    z-index: 1;
-    color: #ffffff;
-    font-size: 1em;
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
-    padding: 0 20px;
-    margin: 10px 0;
-}
-
-.update-card a.update-link {
-    z-index: 1;
-    color: #000000;
-    background: #FF0000;
-    padding: 10px 20px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    font-size: 1.1em;
-    transition: all 0.3s ease;
-}
-
-.update-card a.update-link:hover {
-    background: #8B0000;
-    color: #ffffff;
-}
-
-.update-card::before {
-    content: '';
-    position: absolute;
-    width: 120px;
-    background-image: linear-gradient(180deg, #FF0000, #8B0000);
-    height: 140%;
-    animation: rotBGimg 4s linear infinite;
-    transition: all 0.2s linear;
-}
-
-.update-card::after {
-    content: '';
-    position: absolute;
-    background: #000000;
-    inset: 5px;
-    border-radius: 15px;
-}
-
-@keyframes rotBGimg {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Adjust intro-container to avoid overlap */
-.intro-container {
-    padding-top: 340px;
-}
-
 @media (max-width: 480px) {
     .logo { width: 150px; height: 150px; }
     .logo.moved { transform: translateY(-10vh); }
@@ -595,23 +508,39 @@ body {
     .control-btn { width: 40px; height: 40px; }
     .play-pause { width: 50px; height: 50px; }
     .social-card { width: 180px; height: 180px; }
-    .update-card {
-        width: 250px;
-        height: 280px;
-        top: 10px;
-    }
-    .update-card h2 {
-        font-size: 1.5em;
-    }
-    .update-card p {
-        font-size: 0.9em;
-        padding: 0 15px;
-    }
-    .update-card a.update-link {
-        font-size: 1em;
-        padding: 8px 16px;
-    }
-    .intro-container {
-        padding-top: 300px;
-    }
+}
+.update-banner {
+    background: rgba(20, 20, 20, 0.95); /* Matches your dark theme */
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Stays above other elements */
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    border-bottom: 2px solid #8B0000; /* Ties in with your red accents */
+}
+
+.update-banner p {
+    margin: 0;
+}
+
+.update-banner a {
+    color: #FF0000; /* Bright red for visibility */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.update-banner a:hover {
+    color: #ffffff; /* White on hover for contrast */
+    text-decoration: underline;
+}
+
+/* Adjust intro-container to avoid overlap */
+.intro-container {
+    padding-top: 40px; /* Adds space for the banner */
 }
