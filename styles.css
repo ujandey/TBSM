@@ -509,3 +509,38 @@ body {
     .play-pause { width: 50px; height: 50px; }
     .social-card { width: 180px; height: 180px; }
 }
+.update-banner {
+    background: rgba(20, 20, 20, 0.95); /* Matches your dark theme */
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Stays above other elements */
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    border-bottom: 2px solid #8B0000; /* Ties in with your red accents */
+}
+
+.update-banner p {
+    margin: 0;
+}
+
+.update-banner a {
+    color: #FF0000; /* Bright red for visibility */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.update-banner a:hover {
+    color: #ffffff; /* White on hover for contrast */
+    text-decoration: underline;
+}
+
+/* Adjust intro-container to avoid overlap */
+.intro-container {
+    padding-top: 40px; /* Adds space for the banner */
+}
