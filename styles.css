@@ -509,37 +509,119 @@ body {
     .play-pause { width: 50px; height: 50px; }
     .social-card { width: 180px; height: 180px; }
 }
-.update-banner {
-    background: rgba(20, 20, 20, 0.95); /* Matches your dark theme */
+
+.update-card {
+    width: 300px; /* Slightly wider than the original 190px for readability */
+    height: 320px; /* Adjusted from 254px to fit more content */
+    background: #000000; /* Black to match your body background */
+    position: fixed; /* Stays at the top */
+    top: 20px; /* Small offset from the top */
+    left: 50%;
+    transform: translateX(-50%); /* Centers horizontally */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 20px;
+    z-index: 1000; /* Above other elements */
+    box-shadow: 0 0 20px rgba(139, 0, 0, 0.5); /* Subtle red glow */
+}
+
+.update-card h2 {
+    z-index: 1;
+    color: #FF0000; /* Bright blood red */
+    font-size: 1.8em; /* Slightly smaller than 2em for balance */
+    font-family: 'Montserrat', sans-serif; /* Matches your site */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.update-card p {
+    z-index: 1;
     color: #ffffff;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000; /* Stays above other elements */
+    font-size: 1em;
     font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    border-bottom: 2px solid #8B0000; /* Ties in with your red accents */
+    text-align: center;
+    padding: 0 20px;
+    margin: 10px 0;
 }
 
-.update-banner p {
-    margin: 0;
-}
-
-.update-banner a {
-    color: #FF0000; /* Bright red for visibility */
+.update-card a.update-link {
+    z-index: 1;
+    color: #000000;
+    background: #FF0000; /* Bright red button */
+    padding: 10px 20px;
+    border-radius: 10px;
     text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
-    transition: color 0.3s ease;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
 }
 
-.update-banner a:hover {
-    color: #ffffff; /* White on hover for contrast */
-    text-decoration: underline;
+.update-card a.update-link:hover {
+    background: #8B0000; /* Darker red on hover */
+    color: #ffffff;
 }
 
+/* Animated gradient border */
+.update-card::before {
+    content: '';
+    position: absolute;
+    width: 120px; /* Slightly larger than original 100px */
+    background-image: linear-gradient(180deg, #FF0000, #8B0000); /* Blood red gradient */
+    height: 140%; /* Covers the card fully */
+    animation: rotBGimg 4s linear infinite; /* Slower rotation for a chill vibe */
+    transition: all 0.2s linear;
+}
+
+/* Inner layer to create the "cutout" effect */
+.update-card::after {
+    content: '';
+    position: absolute;
+    background: #000000; /* Matches the card background */
+    inset: 5px; /* Creates the border thickness */
+    border-radius: 15px; /* Slightly smaller radius than outer */
+}
+
+/* Animation for the gradient */
+@keyframes rotBGimg {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Adjust intro-container to avoid overlap */
+.intro-container {
+    padding-top: 340px; /* Increased to account for the taller card */
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .update-card {
+        width: 250px;
+        height: 280px;
+        top: 10px;
+    }
+    .update-card h2 {
+        font-size: 1.5em;
+    }
+    .update-card p {
+        font-size: 0.9em;
+        padding: 0 15px;
+    }
+    .update-card a.update-link {
+        font-size: 1em;
+        padding: 8px 16px;
+    }
+    .intro-container {
+        padding-top: 300px; /* Adjusted for smaller card */
+    }
+}
 /* Adjust intro-container to avoid overlap */
 .intro-container {
     padding-top: 40px; /* Adds space for the banner */
