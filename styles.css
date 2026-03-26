@@ -272,6 +272,35 @@ body {
     background: #FF0000;
 }
 
+.mode-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.mode-btn {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+
+.mode-btn:hover {
+    border-color: rgba(255, 0, 0, 0.7);
+    background: rgba(139, 0, 0, 0.3);
+}
+
+.mode-btn.active {
+    border-color: #FF0000;
+    background: rgba(255, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.25);
+}
+
 .volume-container {
     display: flex;
     align-items: center;
@@ -516,5 +545,7 @@ body {
     .track-info h2 { font-size: 20px; }
     .control-btn { width: 40px; height: 40px; }
     .play-pause { width: 50px; height: 50px; }
+    .mode-buttons { flex-direction: column; width: 100%; }
+    .mode-btn { width: 100%; }
     .social-card { width: 180px; height: 180px; }
 }

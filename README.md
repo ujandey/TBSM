@@ -13,8 +13,11 @@ This project is a creative tribute: a custom player UI for exploring tracks in a
 - Album-based filtering sidebar (`All`, `N`, `Nayaab`, `Lunch Break`, `Shakti`, etc.)
 - Dynamic playlist rendering from a JavaScript track list
 - Audio controls: play/pause, previous/next, seek bar, volume slider
+- Advanced playback modes: shuffle + repeat (`off` / `all` / `one`)
 - Live time display (`currentTime` / `totalTime`)
 - Track metadata updates (title, artist, album, artwork)
+- Session memory with `localStorage` (remembers track, time, volume, shuffle, repeat, album)
+- Keyboard shortcuts for power users
 - Simulated live listener counter
 - Social card with animated hover effects and links
 - Mobile responsive layout for smaller screens
@@ -53,10 +56,21 @@ That is it. No build tools, no framework setup.
 - **Tune the visual vibe:** tweak colors, shadows, and animations in `styles.css`
 - **Adjust default behavior:** change initial volume, default album, or intro timing in `script.js`
 
+## Keyboard Shortcuts
+
+- `Space` - play / pause
+- `Arrow Left` / `Arrow Right` - seek -5s / +5s
+- `Arrow Up` / `Arrow Down` - volume +5 / -5
+- `M` - mute / unmute (quick toggle)
+- `N` / `B` - next / previous track
+- `S` - toggle shuffle
+- `R` - cycle repeat mode (`off` -> `all` -> `one`)
+
 ## Notes
 
 - Audio file paths in `script.js` must match your local `audio/` directory.
 - Browser autoplay rules can affect when audio starts; interaction through START is already in place to help with this.
+- Playback progress is saved during listening and restored on the next visit after pressing START.
 
 ## Credits
 

@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const playPauseBtn = document.getElementById('playPauseBtn');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
+    const shuffleBtn = document.getElementById('shuffleBtn');
+    const repeatBtn = document.getElementById('repeatBtn');
     const volumeSlider = document.getElementById('volumeSlider');
     const volumeIcon = document.getElementById('volumeIcon');
     const progressBar = document.getElementById('progressBar');
@@ -28,6 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentTrackIndex = 0;
     let currentAlbum = 'All'; // Default to show all songs
     let filteredPlaylist = [];
+    let isShuffle = false;
+    let repeatMode = 'off'; // off | all | one
+    let resumeState = null;
+
+    const STORAGE_KEY = 'tbsm4l-player-state';
 
     // Playlist
     const playlist = [
@@ -71,12 +78,111 @@ document.addEventListener('DOMContentLoaded', () => {
 
     ];
 
-    // Intro animation and player reveal
-    startBtn.addEventListener('click', () => {
+    function updateModeButtons() {
+        shuffleBtn.classList.toggle('active', isShuffle);
+        repeatBtn.classList.toggle('active', repeatMode !== 'off');
+        repeatBtn.innerHTML = repeatMode === 'one'
+            ? '<i class="fas fa-redo-alt"></i> Repeat: One'
+            : repeatMode === 'all'
+                ? '<i class="fas fa-repeat"></i> Repeat: All'
+                : '<i class="fas fa-repeat"></i> Repeat: Off';
+    }
+
+    function savePlayerState() {
+        const currentTrack = filteredPlaylist[currentTrackIndex];
+        const globalTrackIndex = currentTrack ? playlist.findIndex(track => track.url === currentTrack.url) : 0;
+        const state = {
+            currentAlbum,
+            currentTrackIndex: globalTrackIndex >= 0 ? globalTrackIndex : 0,
+            currentTime: Number.isFinite(audioPlayer.currentTime) ? audioPlayer.currentTime : 0,
+            volume: Number(volumeSlider.value) / 100,
+            isShuffle,
+            repeatMode
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function loadPlayerState() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return;
+            const parsed = JSON.parse(raw);
+            if (typeof parsed === 'object' && parsed) {
+                resumeState = parsed;
+                currentAlbum = parsed.currentAlbum || 'All';
+                isShuffle = Boolean(parsed.isShuffle);
+                repeatMode = ['off', 'all', 'one'].includes(parsed.repeatMode) ? parsed.repeatMode : 'off';
+                if (typeof parsed.volume === 'number') {
+                    const clampedVolume = Math.max(0, Math.min(1, parsed.volume));
+                    audioPlayer.volume = clampedVolume;
+                    volumeSlider.value = String(Math.round(clampedVolume * 100));
+                    volumeIcon.className = `fas ${clampedVolume > 0.5 ? 'fa-volume-up' : clampedVolume > 0 ? 'fa-volume-down' : 'fa-volume-mute'}`;
+                }
+            }
+        } catch (error) {
+            console.error('Unable to restore player state:', error);
+        }
+    }
+
+    function showPlayer() {
         logo.classList.add('moved');
         introContainer.classList.add('hidden');
         playerWrapper.classList.add('active');
-        loadAndPlay(0);
+    }
+
+    function getRandomTrackIndex() {
+        if (filteredPlaylist.length <= 1) return 0;
+        let randomIndex = Math.floor(Math.random() * filteredPlaylist.length);
+        while (randomIndex === currentTrackIndex) {
+            randomIndex = Math.floor(Math.random() * filteredPlaylist.length);
+        }
+        return randomIndex;
+    }
+
+    function playNextTrack() {
+        if (repeatMode === 'one') {
+            loadAndPlay(currentTrackIndex);
+            return;
+        }
+        const nextIndex = isShuffle ? getRandomTrackIndex() : currentTrackIndex + 1;
+        if (!isShuffle && nextIndex >= filteredPlaylist.length && repeatMode === 'off') {
+            pauseTrack();
+            audioPlayer.currentTime = 0;
+            progress.style.width = '0%';
+            currentTimeEl.textContent = '0:00';
+            return;
+        }
+        loadAndPlay(nextIndex);
+    }
+
+    function playPreviousTrack() {
+        const prevIndex = isShuffle ? getRandomTrackIndex() : currentTrackIndex - 1;
+        loadAndPlay(prevIndex);
+    }
+
+    // Intro animation and player reveal
+    startBtn.addEventListener('click', () => {
+        showPlayer();
+        if (resumeState && Number.isInteger(resumeState.currentTrackIndex)) {
+            const resumeTrack = playlist[resumeState.currentTrackIndex];
+            const albumExists = albums.includes(currentAlbum);
+            currentAlbum = albumExists ? currentAlbum : 'All';
+            filterAndRenderPlaylist();
+
+            let targetIndex = filteredPlaylist.findIndex(track => track.url === resumeTrack?.url);
+            if (targetIndex < 0) {
+                currentAlbum = 'All';
+                filterAndRenderPlaylist();
+                targetIndex = filteredPlaylist.findIndex(track => track.url === resumeTrack?.url);
+            }
+            loadAndPlay(targetIndex >= 0 ? targetIndex : 0);
+            const resumeTime = Number(resumeState.currentTime) || 0;
+            audioPlayer.addEventListener('loadedmetadata', () => {
+                audioPlayer.currentTime = Math.min(resumeTime, audioPlayer.duration || resumeTime);
+            }, { once: true });
+        } else {
+            loadAndPlay(0);
+        }
     });
 
     // Get unique albums
@@ -104,6 +210,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function filterAndRenderPlaylist() {
         filteredPlaylist = currentAlbum === 'All' ? playlist : playlist.filter(track => track.album === currentAlbum);
         currentAlbumTitle.textContent = currentAlbum === 'All' ? 'All Tracks' : currentAlbum;
+        if (!filteredPlaylist.length) {
+            filteredPlaylist = playlist;
+            currentAlbum = 'All';
+            currentAlbumTitle.textContent = 'All Tracks';
+        }
+        if (currentTrackIndex >= filteredPlaylist.length) {
+            currentTrackIndex = 0;
+        }
         playlistEl.innerHTML = '';
         filteredPlaylist.forEach((track, index) => {
             const li = document.createElement('li');
@@ -177,13 +291,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event Listeners
     playPauseBtn.addEventListener('click', () => isPlaying ? pauseTrack() : playTrack());
-    prevBtn.addEventListener('click', () => loadAndPlay(currentTrackIndex - 1));
-    nextBtn.addEventListener('click', () => loadAndPlay(currentTrackIndex + 1));
+    prevBtn.addEventListener('click', playPreviousTrack);
+    nextBtn.addEventListener('click', playNextTrack);
+
+    shuffleBtn.addEventListener('click', () => {
+        isShuffle = !isShuffle;
+        updateModeButtons();
+        savePlayerState();
+    });
+
+    repeatBtn.addEventListener('click', () => {
+        repeatMode = repeatMode === 'off' ? 'all' : repeatMode === 'all' ? 'one' : 'off';
+        updateModeButtons();
+        savePlayerState();
+    });
 
     volumeSlider.addEventListener('input', () => {
         const volume = volumeSlider.value / 100;
         audioPlayer.volume = volume;
         volumeIcon.className = `fas ${volume > 0.5 ? 'fa-volume-up' : volume > 0 ? 'fa-volume-down' : 'fa-volume-mute'}`;
+        savePlayerState();
     });
 
     progressBar.addEventListener('click', (e) => {
@@ -199,6 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
             currentTimeEl.textContent = formatTime(currentTime);
             totalTimeEl.textContent = formatTime(duration);
         }
+        savePlayerState();
     });
 
     audioPlayer.addEventListener('loadedmetadata', () => {
@@ -206,13 +334,49 @@ document.addEventListener('DOMContentLoaded', () => {
         totalTimeEl.textContent = formatTime(audioPlayer.duration);
     });
 
-    audioPlayer.addEventListener('ended', () => loadAndPlay(currentTrackIndex + 1));
+    audioPlayer.addEventListener('ended', playNextTrack);
     audioPlayer.addEventListener('error', () => {
         console.error('Audio error:', audioPlayer.error.message);
         trackTitle.textContent = 'Error loading track';
     });
 
+    document.addEventListener('keydown', (event) => {
+        const activeTag = document.activeElement?.tagName;
+        if (activeTag === 'INPUT' || activeTag === 'TEXTAREA') return;
+        if (event.code === 'Space') {
+            event.preventDefault();
+            isPlaying ? pauseTrack() : playTrack();
+        } else if (event.code === 'ArrowRight') {
+            audioPlayer.currentTime = Math.min(audioPlayer.currentTime + 5, audioPlayer.duration || audioPlayer.currentTime + 5);
+        } else if (event.code === 'ArrowLeft') {
+            audioPlayer.currentTime = Math.max(audioPlayer.currentTime - 5, 0);
+        } else if (event.code === 'ArrowUp') {
+            volumeSlider.value = String(Math.min(100, Number(volumeSlider.value) + 5));
+            volumeSlider.dispatchEvent(new Event('input'));
+        } else if (event.code === 'ArrowDown') {
+            volumeSlider.value = String(Math.max(0, Number(volumeSlider.value) - 5));
+            volumeSlider.dispatchEvent(new Event('input'));
+        } else if (event.key.toLowerCase() === 'm') {
+            volumeSlider.value = volumeSlider.value === '0' ? '70' : '0';
+            volumeSlider.dispatchEvent(new Event('input'));
+        } else if (event.key.toLowerCase() === 'n') {
+            playNextTrack();
+        } else if (event.key.toLowerCase() === 'b') {
+            playPreviousTrack();
+        } else if (event.key.toLowerCase() === 's') {
+            isShuffle = !isShuffle;
+            updateModeButtons();
+            savePlayerState();
+        } else if (event.key.toLowerCase() === 'r') {
+            repeatMode = repeatMode === 'off' ? 'all' : repeatMode === 'all' ? 'one' : 'off';
+            updateModeButtons();
+            savePlayerState();
+        }
+    });
+
     // Initialize
+    loadPlayerState();
+    updateModeButtons();
     renderAlbumList();
     filterAndRenderPlaylist();
 });
