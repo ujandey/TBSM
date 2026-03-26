@@ -495,78 +495,6 @@ body {
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
 }
 
-.update-card {
-    width: 200px; /* Smaller width for a sidebar feel */
-    height: 150px; /* Compact height */
-    background: #000000;
-    position: fixed;
-    top: 20px; /* Near the top */
-    right: 20px; /* On the right side */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    border-radius: 10px; /* Smaller radius for a compact look */
-    z-index: 1000;
-    box-shadow: 0 0 15px rgba(139, 0, 0, 0.5);
-}
-
-.update-card h2 {
-    z-index: 1;
-    color: #FF0000;
-    font-size: 1.2em; /* Smaller heading */
-    font-family: 'Montserrat', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.update-card p {
-    z-index: 1;
-    color: #ffffff;
-    font-size: 0.9em;
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
-    padding: 0 10px;
-    margin: 5px 0;
-}
-
-.update-card a.update-link {
-    z-index: 1;
-    color: #000000;
-    background: #FF0000;
-    padding: 5px 10px; /* Smaller button */
-    border-radius: 5px;
-    text-decoration: none;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    font-size: 0.9em;
-    transition: all 0.3s ease;
-}
-
-.update-card a.update-link:hover {
-    background: #8B0000;
-    color: #ffffff;
-}
-
-.update-card::before {
-    content: '';
-    position: absolute;
-    width: 80px; /* Adjusted for smaller size */
-    background-image: linear-gradient(180deg, #FF0000, #8B0000);
-    height: 140%;
-    animation: rotBGimg 4s linear infinite;
-    transition: all 0.2s linear;
-}
-
-.update-card::after {
-    content: '';
-    position: absolute;
-    background: #000000;
-    inset: 3px; /* Thinner border for compactness */
-    border-radius: 7px; /* Matches smaller outer radius */
-}
-
 @keyframes rotBGimg {
     from {
         transform: rotate(0deg);
@@ -589,21 +517,4 @@ body {
     .control-btn { width: 40px; height: 40px; }
     .play-pause { width: 50px; height: 50px; }
     .social-card { width: 180px; height: 180px; }
-    .update-card {
-        width: 150px; /* Even smaller on mobile */
-        height: 120px;
-        right: 10px;
-        top: 10px;
-    }
-    .update-card h2 {
-        font-size: 1em;
-    }
-    .update-card p {
-        font-size: 0.8em;
-        padding: 0 8px;
-    }
-    .update-card a.update-link {
-        font-size: 0.8em;
-        padding: 4px 8px;
-    }
 }
